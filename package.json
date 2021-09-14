@@ -3,6 +3,7 @@
   "version": "1.0.2",
   "description": "",
   "main": "server.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js hw_200.csv result.json '\n '",
