@@ -1,40 +1,32 @@
-
-// Node packages for file system
-const fs = require('fs');
-const path = require('path');
+const fs = require("fs");
+const { Transform } = require("stream");
 
 let sourceFile = process.argv[2];
 let resultFile = process.argv[3];
 let separator = process.argv[4];
-console.log(sourceFile, resultFile, separator)
 
+const createTransformStream = () =>
+  new Transform({
+    transform(chunk, encoding, callback) {
+      let content = "";
+      content += chunk;
+      content = content.split("\n");
 
-const filePath = path.join(__dirname, sourceFile);
-// Read CSV
-let f = fs.readFileSync(filePath, {encoding: 'utf-8'}, 
-    function(err){console.log(err);});
+      let headers = content.shift().split(separator);
 
-// Split on row
-f = f.split(separator);
-console.log(f)
+      const json = [];
+      content.forEach((row) => {
+        convertedObject = {};
+        rowItems = row.split(separator);
+        headers.forEach((header, i) => (convertedObject[header] = rowItems[i]));
+        json.push(convertedObject);
+      });
+      callback(null, JSON.stringify(json));
+    },
+  });
+transformStream = createTransformStream();
 
-// Get first row for column headers
-headers = f.shift().split("kek");
-console.log(headers)
+let readableStream = fs.createReadStream(sourceFile);
+let writableStream = fs.createWriteStream(resultFile);
 
-const json = [];    
-f.forEach(d => {
-    // Loop through each row
-    tmp = {}
-    row = d.split(",")
-    for(var i = 0; i < headers.length; i++){
-        tmp[headers[i]] = row[i];
-    }
-    // Add object to list
-    json.push(tmp);
-});
-
-var outPath = path.join(__dirname, resultFile);
-// Convert object to string, write json to file
-fs.writeFileSync(outPath, JSON.stringify(json), 'utf8', 
-    function(err){console.log(err);});
+readableStream.pipe(transformStream).pipe(writableStream);
