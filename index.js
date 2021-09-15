@@ -1,14 +1,10 @@
-// import { createReadStream, createWriteStream } from "fs";
 const fs = require("fs");
 const { Transform } = require("stream");
-
-// import { Transform } from "stream";
 
 const convert = () => {
   const sourceFile = process.argv[2];
   const resultFile = process.argv[3];
   let separator = process.argv[4];
-  console.log(process.argv);
 
   const detectSeparator = (content) => {
     let separator = null;

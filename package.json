@@ -3,12 +3,9 @@
   "version": "1.0.4",
   "description": "",
   "main": "server.js",
-  "type": "module",
   "bin": "cli.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js --sourceFile  test_csv.csv --resultFile result.json ','",
-    "convert": "csv-to-json-by-tataritsky -- test_csv.csv result.json ','"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
