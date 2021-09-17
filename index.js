@@ -5,32 +5,44 @@ const convert = () => {
   const sourceFile = process.argv[2];
   const resultFile = process.argv[3];
   let separator = process.argv[4];
+  let isFirstChunk = true;
 
-  const detectSeparator = (content) => {
-    let separator = null;
+  const errorHandler = err => console.log(err)
+  let readableStream = fs.createReadStream(sourceFile);
 
-    // find all punctuation marks of each 10 rows
-    let arrsOfRows = content
-      .slice(0, 10)
-      .map((row) => row.match(/[^A-Za-z0-9]/g));
+  const detectSeparator = content => {
+    let detectedSeparator = '';
+    isFirstChunk = false;
+    let row = content[0];
 
-    // filter array of punctuation marks of each rows with marks of first row
-    const repeatedMarks = arrsOfRows
-      .shift()
-      .filter((v) => arrsOfRows.every((a) => a.indexOf(v) !== -1));
+    const test = row.match(/(\s*"[^"]+"\s*|\s*[^,]+|,)(?=,|$)/g);
 
-    // find most repeated mark from array of repeated marks
-    separator =
-      [
-        ...new Set(
-          repeatedMarks.filter(
-            (value, index, self) => self.indexOf(value) !== index
-          )
-        ),
-      ][0] || "";
+    test.forEach(item => {
+      row = row.replace(item, "");
+    });
 
-    return separator;
+    const countOccurrences = (arr, val) => arr.reduce((a, v) => (v === val ? a + 1 : a), 0);
+    const arrsOfMarks = row.split('');
+    arrsOfMarks.forEach(mark => {
+      if(countOccurrences(arrsOfMarks, mark) >= test.length - 1){
+        detectedSeparator = mark;
+      }
+    })
+
+    if(detectedSeparator !== separator){
+      errorHandler(`Warning: auto detect delimiter is "${detectedSeparator}" but input "${separator}"`)
+    }
+
+    return detectedSeparator;
   };
+
+  readableStream.on('data', (chunk) => {
+    if (isFirstChunk) {
+      let content = "";
+      content += chunk;
+      separator = detectSeparator(content.split("\n"));
+    }
+  }).on('error', (error) => errorHandler(error.message));
 
   const createTransformStream = () =>
     new Transform({
@@ -39,14 +51,10 @@ const convert = () => {
         content += chunk;
         content = content.split("\n");
 
-        if (!separator) {
-          separator = detectSeparator(content);
-        }
-
         let headers = content.shift().split(separator);
 
         const json = [];
-        content.forEach((row) => {
+        content.forEach(row => {
           let convertedObject = {};
           let rowItems = row.split(separator);
           headers.forEach(
@@ -55,13 +63,11 @@ const convert = () => {
           json.push(convertedObject);
         });
         callback(null, JSON.stringify(json));
-      },
+      }
     });
   const transformStream = createTransformStream();
 
-  let readableStream = fs.createReadStream(sourceFile);
-  let writableStream = fs.createWriteStream(resultFile);
-
+  const writableStream = fs.createWriteStream(resultFile);
   readableStream.pipe(transformStream).pipe(writableStream);
 };
 
