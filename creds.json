@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "upload-csv-to-json-file",
+  "private_key_id": "6690ef892142121dd8bd0c6f9bb4064edadcfdc3",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC0NCP5f6bXusPA\n1AM8kZR5lEImwlxPtBXxqRsOyKKvFYByiVXWhTdn9GWczr3y9xJ0mwwFC/NduRuP\na7bPFW30WymemTYg2mvqlPX9M+VBMFJAoVVNuOfVhxVY41iBRACLue6ejvOZfhof\n76gIZQPd11UmX44D7xfPGPX9J0iq64uXlf7FmxCaz7OJU3zRVDro3jnvSIWl/K9x\nH9TUUy+7Gpc89mT3HPBAel9L8DEoYELXTyZwpQJofBLNQhpKI0eemn/vQ1J/IJ6o\nfzwdsZQbBcqQVfBkqATnjN+D7TcDs+0CMktQYdc1lQh0X9CwGNc7wrC1Ca47vJHy\ngDaSIe5NAgMBAAECggEAD8gXNHUI/BCnrx4CMI5BVgp1ZqaT5gkL+O+J5pgMo0+7\nQYykf1aIXSrKsVpryTj5HUws185NoHIjJ0LULjuetw06zmB1nJf0ZoVoK6YdWEGu\nmmlmqplceFdNt8ylRiDZ+WKtsqYrUFB6YjyfVyjdl1KR6vvoWJDaYXE6rdKAazNy\nqYreIiQV3Of0BdZfs1I8bQnG87xNxjCesuFzvhXgyLXEKLpOykwZ2kw+RuFLyIeK\nky7HTwC1yA8glHn1c+kCETpjUTnike3IFW2Jix+tX+/xPw4GoSHVDQEbIuvgiOSN\nSdpvP3BK0lEDlGtA49EOjKFChqINrA5gROj0mO/BowKBgQD5fv1NTqi1DrmoJu6g\ng7zpVD3gq3EDmKddF4V6dCrsnPLAFacmguug5MGuEuC5jxBy4RT/e8KoT1HbIpYc\n7zS8J5nEKYGVI205zbLkses91pBYIJMj8ayiCdL5md84Z5KaVczFjAMw+0scVLzH\n+jIQmDSx+2sBCQkIE8liq7yy4wKBgQC45rqPvoZq74mAxFjiBqFX5ukB+dskirH9\nYYNmMZvEmM/pPYuz6WRw3BuB3wDaM7apoz/cnOGact2xyRydqjc6B/zObw+8yWL5\nTprguYfTX88GOrcxjroUNzco7emIjjXJqBrOxA5DRUpwns7Xxxku+s6YhYrFGbis\n+3NulrIxDwKBgQD3jAFFsBMCOk8JQT+o8a0BkX0nqtMiL1d3rTvZyONCC2NsJM/J\nDUM/S1nEHqTsV7+JTDxqVWBJYRIlrAZnRQv82AngMRKKaDEalja2ZLW0kGx9lCyK\nEGMqDzdOQlbRfypdiV34b7hG5D6dKJJ6lIsSHgLCyWNdDprwcblx9lXu4wKBgQCS\nHGGYbWoy3o693mqOUcb1e1btZM+zFJaKL6ByBQmeVVMWcLgQt4HTXVuvSNWXl/3k\nF0jDwITWU6a0csPWI0f4547yYfkBqfI4J9Fje7jFY5Roy8UvuCV7DBbelQJSEm6W\np+xnL65Fol+slxHEmWRhJ3hSNlTuY+D3cMxKu3KcKQKBgBsUpunAt9sJwLsvZkwS\njRyI0Dt9eCVS7iCtI6ACrXNnlljlJAtKBYqkuN8GLuVCKIfra4Vk0BdmULsTdHfk\n30PJlxZx73oq/ArXZny03FDYAkZZ/VnGeqa4eyx4yzU8V4c77keeEhomdAAUuSAg\nnKm+p42xz7/9qARlMEGgZ0v4\n-----END PRIVATE KEY-----\n",
+  "client_email": "uladzislau-tatatytski@upload-csv-to-json-file.iam.gserviceaccount.com",
+  "client_id": "116852561215206517912",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/uladzislau-tatatytski%40upload-csv-to-json-file.iam.gserviceaccount.com"
+}

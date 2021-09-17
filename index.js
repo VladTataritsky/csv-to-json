@@ -1,5 +1,6 @@
 const fs = require("fs");
 const { Transform } = require("stream");
+const uploadToDrive = require('./uploadToDrive');
 
 const convert = () => {
   const sourceFile = process.argv[2];
@@ -66,8 +67,11 @@ const convert = () => {
       }
     });
   const transformStream = createTransformStream();
+  transformStream.on('error', error => console.log(error))
 
   const writableStream = fs.createWriteStream(resultFile);
+  writableStream.on('finish', () =>   uploadToDrive(resultFile));
+  
   readableStream.pipe(transformStream).pipe(writableStream);
 };
 

@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/VladTataritsky/csv-to-json/issues"
   },
-  "homepage": "https://github.com/VladTataritsky/csv-to-json#readme"
+  "homepage": "https://github.com/VladTataritsky/csv-to-json#readme",
+  "dependencies": {
+    "google-auth-library": "^7.9.2",
+    "googleapis": "^87.0.0"
+  }
 }
