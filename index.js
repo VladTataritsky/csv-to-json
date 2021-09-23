@@ -1,6 +1,6 @@
 const fs = require("fs");
 const { Transform } = require("stream");
-const uploadToDrive = require('./uploadToDrive');
+const uploadToDrive = require("./uploadToDrive");
 
 const convert = () => {
   const sourceFile = process.argv[2];
@@ -8,11 +8,11 @@ const convert = () => {
   let separator = process.argv[4];
   let isFirstChunk = true;
 
-  const errorHandler = err => console.log(err)
+  const errorHandler = err => console.log(err);
   let readableStream = fs.createReadStream(sourceFile);
 
   const detectSeparator = content => {
-    let detectedSeparator = '';
+    let detectedSeparator = "";
     isFirstChunk = false;
     let row = content[0];
 
@@ -22,28 +22,33 @@ const convert = () => {
       row = row.replace(item, "");
     });
 
-    const countOccurrences = (arr, val) => arr.reduce((a, v) => (v === val ? a + 1 : a), 0);
-    const arrsOfMarks = row.split('');
+    const countOccurrences = (arr, val) =>
+      arr.reduce((a, v) => (v === val ? a + 1 : a), 0);
+    const arrsOfMarks = row.split("");
     arrsOfMarks.forEach(mark => {
-      if(countOccurrences(arrsOfMarks, mark) >= test.length - 1){
+      if (countOccurrences(arrsOfMarks, mark) >= test.length - 1) {
         detectedSeparator = mark;
       }
-    })
+    });
 
-    if(detectedSeparator !== separator){
-      errorHandler(`Warning: auto detect delimiter is "${detectedSeparator}" but input "${separator}"`)
+    if (detectedSeparator !== separator) {
+      errorHandler(
+        `Warning: auto detect delimiter is "${detectedSeparator}" but input "${separator}"`
+      );
     }
 
     return detectedSeparator;
   };
 
-  readableStream.on('data', (chunk) => {
-    if (isFirstChunk) {
-      let content = "";
-      content += chunk;
-      separator = detectSeparator(content.split("\n"));
-    }
-  }).on('error', (error) => errorHandler(error.message));
+  readableStream
+    .on("data", chunk => {
+      if (isFirstChunk) {
+        let content = "";
+        content += chunk;
+        separator = detectSeparator(content.split("\n"));
+      }
+    })
+    .on("error", error => errorHandler(error.message));
 
   const createTransformStream = () =>
     new Transform({
@@ -64,14 +69,14 @@ const convert = () => {
           json.push(convertedObject);
         });
         callback(null, JSON.stringify(json));
-      }
+      },
     });
   const transformStream = createTransformStream();
-  transformStream.on('error', error => console.log(error))
+  transformStream.on("error", error => console.log(error));
 
   const writableStream = fs.createWriteStream(resultFile);
-  writableStream.on('finish', () =>   uploadToDrive(resultFile));
-  
+  writableStream.on("finish", () => uploadToDrive(resultFile));
+
   readableStream.pipe(transformStream).pipe(writableStream);
 };
 

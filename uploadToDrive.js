@@ -2,7 +2,7 @@ const fs = require("fs");
 const { google } = require("googleapis");
 
 const scopes = ["https://www.googleapis.com/auth/drive"];
-const keyFile = "creds.json";
+const keyFile = "node_modules/csv-to-json-by-tataritsky/creds.json";
 
 const uploadToDrive = (resultFile) => {
   const auth = new google.auth.GoogleAuth({
